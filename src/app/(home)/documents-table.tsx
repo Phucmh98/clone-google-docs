@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { DocumentRow } from "./documents-row";
+import { Button } from "@/components/ui/button";
 
 interface DocumentsTableProps {
   documents: Doc<"documents">[] | undefined;
@@ -51,13 +52,23 @@ export const DocumentsTable = ({
             </TableBody>
           ) : (
             <TableBody>
-                {documents.map((document) => (
-                    <DocumentRow key={document._id} document={document} />
-                ))}
+              {documents.map((document) => (
+                <DocumentRow key={document._id} document={document} />
+              ))}
             </TableBody>
           )}
         </Table>
       )}
+      <div className="flex items-center justify-center">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => loadMore(5)}
+          disabled={status !== "CanLoadMore"}
+        >
+          {status === "CanLoadMore" ? "Load more" : "End of results"}
+        </Button>
+      </div>
     </div>
   );
 };
