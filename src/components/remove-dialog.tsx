@@ -15,6 +15,7 @@ import { Id } from "../../convex/_generated/dataModel";
 import { api } from "../../convex/_generated/api";
 import { useMutation } from "convex/react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface RemoveDialogProps {
   documentId: Id<"documents">;
@@ -47,7 +48,10 @@ export const RemoveDialog = ({ documentId, children }: RemoveDialogProps) => {
               setIsRemoving(true);
               remove({
                 id: documentId,
-              }).finally(() => setIsRemoving(false));
+              })
+              .catch(()=>toast.error("Something went wrong"))
+              .then(() => toast.success("Document removed")) //TODO: Add redirect to home page
+              .finally(() => setIsRemoving(false));
             }}
           >
             Delete
