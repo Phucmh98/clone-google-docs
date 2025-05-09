@@ -23,7 +23,6 @@ import {
   FilePlusIcon,
   FileTextIcon,
   GlobeIcon,
-
   Italic,
   PrinterIcon,
   Redo2Icon,
@@ -37,10 +36,15 @@ import {
 import { BsFilePdf } from "react-icons/bs";
 import { useEditorStore } from "@/app/store/use-editor-store";
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
-import {Avatars} from "./avatars";
+import { Avatars } from "./avatars";
 import { Inbox } from "./inbox";
+import { Doc } from "../../../../convex/_generated/dataModel";
 
-export const Navbar = () => {
+interface NavbarProps {
+  data: Doc<"documents">;
+}
+
+export const Navbar = ({ data }: NavbarProps) => {
   const { editor } = useEditorStore();
   const insertTable = ({ rows, cols }: { rows: number; cols: number }) => {
     editor
@@ -66,20 +70,20 @@ export const Navbar = () => {
     const blob = new Blob([JSON.stringify(content)], {
       type: "application/json",
     });
-    onDownload(blob, "document.json"); //TODO: Use document name
+    onDownload(blob, `${data.title}.json`);
   };
   const onSaveHTML = () => {
     if (!editor) return;
     const content = editor.getHTML();
     const blob = new Blob([content], { type: "text/html" });
-    onDownload(blob, "document.html"); //TODO: Use document name
+    onDownload(blob, `${data.title}.html`); //TODO: Use document name
   };
 
   const onSaveText = () => {
     if (!editor) return;
     const content = editor.getText();
     const blob = new Blob([content], { type: "text/plain" });
-    onDownload(blob, "document.txt"); //TODO: Use document name
+    onDownload(blob, `${data.title}.txt`); //TODO: Use document name
   };
 
   return (
@@ -90,7 +94,7 @@ export const Navbar = () => {
         </Link>
 
         <div className="flex flex-col">
-          <DocumentInput />
+          <DocumentInput title={data.title} id = {data._id}/>
           <div className="flex">
             <Menubar className="border-none bg-transparent shadow-none h-auto p-0">
               <MenubarMenu>
