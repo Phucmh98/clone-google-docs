@@ -11,11 +11,13 @@ import { FullscreenLoader } from "@/components/fullscreen-loader";
 import { toast } from "sonner";
 import { getUsers,getDocuments } from "./actions";
 import { Id } from "../../../../convex/_generated/dataModel";
+import { LEFT_MARGIN, RIGHT_MARGIN } from "@/constants/margins";
 
 type User = {
   id: string;
   name: string;
   avatar: string;
+  color:string
 };
 
 export function Room({ children }: { children: ReactNode }) {
@@ -26,7 +28,7 @@ export function Room({ children }: { children: ReactNode }) {
       try {
         const list = await getUsers();
         setUsers(list);
-      } catch (e) {
+      } catch{
         toast.error("Failed to fetch users");
       }
     },
@@ -71,12 +73,13 @@ export function Room({ children }: { children: ReactNode }) {
         return documents.map((document) => ({
           id:document.id,
           name:document.name,
+          
         }))
       }}
     >
       <RoomProvider 
       id={params.documentId as string} 
-      initialStorage={{leftMargin:56 ,rightMargin:56}} 
+      initialStorage={{leftMargin:LEFT_MARGIN ,rightMargin:RIGHT_MARGIN}} 
       >
         <ClientSideSuspense
           fallback={<FullscreenLoader label="Room loading..." />}

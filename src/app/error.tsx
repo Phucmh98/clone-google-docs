@@ -38,7 +38,7 @@ const ErrorPage = ({
             <Link href="/">
               Go back
             </Link>
-          Go back
+          
         </Button>
       </div>
     </div>

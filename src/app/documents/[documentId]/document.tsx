@@ -12,6 +12,7 @@ interface DocumentProps {
 
 export const Document =  ({ preloadedDocument }: DocumentProps) => {
   const document = usePreloadedQuery(preloadedDocument);
+  
 
   return (
     <Room>
@@ -21,7 +22,7 @@ export const Document =  ({ preloadedDocument }: DocumentProps) => {
           <Toolbar />
         </div>
         <div className="pt-[114px] print:pt-0">
-          <Editor />
+          <Editor initialContent={document.initialContent}/>
         </div>
       </div>
     </Room>

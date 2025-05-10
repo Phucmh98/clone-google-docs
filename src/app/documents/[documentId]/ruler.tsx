@@ -1,6 +1,7 @@
 import { useMutation, useStorage } from "@liveblocks/react/suspense";
 import { useRef, useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
+import { RIGHT_MARGIN,LEFT_MARGIN } from "@/constants/margins";
 
 const markers = Array.from({ length: 83 }, (_, i) => i);
 export const Ruler = () => {
@@ -58,11 +59,11 @@ export const Ruler = () => {
   };
 
   const handleLeftDoubleClick = () => {
-    setLeftMargin(56);
+    setLeftMargin(LEFT_MARGIN);
   };
 
   const handleRightDoubleClick = () => {
-    setRightMargin(56);
+    setRightMargin(RIGHT_MARGIN);
   };
 
   return (

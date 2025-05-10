@@ -1,6 +1,5 @@
 import { Extension } from "@tiptap/react";
 import "@tiptap/extension-text-style";
-import { types } from "util";
 
 // Khai báo module mở rộng cho "@tiptap/core" để thêm các lệnh mới liên quan đến lineHeight
 declare module "@tiptap/core" {
